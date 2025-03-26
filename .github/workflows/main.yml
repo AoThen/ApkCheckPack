@@ -31,12 +31,12 @@ jobs:
     #   run: go get -v -t -d ./...
 
 
-    - name: Build webdav
+    - name: Build
       working-directory: .
       # env:
       #   CGO_ENABLED: 0
       run: |
-          GOOS=windows GOARCH=amd64 go build -trimpath -ldflags="-w -s" -v
+          GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags="-s -w" -o bin/ApkCheckPack_windows_amd64.exe ./src
           tree .
 
       
@@ -52,4 +52,4 @@ jobs:
       with:
         name: ApkCheckPack
         path: |
-            *.exe
+            bin/ApkCheckPack_windows_amd64.exe
